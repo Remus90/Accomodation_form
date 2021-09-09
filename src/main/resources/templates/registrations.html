@@ -1,0 +1,124 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" rel="stylesheet">
+    <script src="/registrations.js"></script>
+</head>
+<body>
+<style>
+    body{
+    background-color: grey;
+    }
+
+</style>
+<nav class="navbar navbar-expand-xl bg-dark navbar-dark">
+    <a class="navbar-brand" href="#"> Accommodation Registrations Form</a>
+    <button type="button" id="add-registration-main-button" class="btn btn-dark" data-toggle="modal"
+            data-target="#guest-modal">Add Guest
+    </button>
+    <ul class="navbar-nav">
+    </ul>
+</nav>
+<div class="container mt-5">
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Notes</th>
+            <th>Phone</th>
+            <th>Edit/Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="registration: ${registrations}">
+            <td>
+                <a data-th-text="${registration.id}" data-th-href="'/registrations/'+ ${registration.id}">
+                </a>
+            </td>
+            <td data-th-text="${registration.firstname}"></td>
+            <td data-th-text="${registration.lastname}"></td>
+            <td data-th-text="${registration.notes}"></td>
+            <td data-th-text="${registration.phone}"></td>
+            <td>
+                <div data-th-id="${registration.id}" style="cursor:pointer">
+                    <i class="fas fa-edit mr-2 edit-icon" data-toggle="modal" data-target="#guest-modal"></i>
+                    <i class="fas fa-trash-alt delete-icon"></i>
+                    <a data-th-href="'/registrations/' + ${registration.id}">
+                        <i class="fas fa-arrow-alt-circle-right"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row mt-5" data-th-if="${showRegistration!=null}">
+        <div class="col-xl-12 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <span data-th-text="${showRegistration.firstname}"></span>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <span data-th-text="${showRegistration.lastname}"></span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="guest-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Guest</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form group">
+                    <label for="modal-guest-firstname">Firstname</label>
+                    <input class="form-control" id="modal-guest-firstname" type="text"/>
+                </div>
+                <div class="form group">
+                    <label for="modal-guest-lastname">LastName</label>
+                    <input class="form-control" id="modal-guest-lastname" type="text"/>
+                </div>
+                <div class="form group">
+                    <label for="modal-guest-notes">Notes</label>
+                    <input class="form-control" id="modal-guest-notes" type="text"/>
+                </div>
+                <div class="form group">
+                    <label for="modal-guest-phone">Phone</label>
+                    <input class="form-control" id="modal-guest-phone" type="number"/>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal" id="add-registration-button">Save
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
